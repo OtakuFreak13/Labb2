@@ -11,7 +11,7 @@ void printGame(char board[][3])
 			printf("|---|---|---|\n");
 	}
 	printf("-------------\n");
-}
+} 
 
 void chooseSpot(char player, char XO)
 {

@@ -34,15 +34,15 @@ char board[3][3] = {
 	{ '7', '8', '9' }
 };
 
-void name()
+void name (char *name1)
 {
-	char name1 [30];
 	printf("What is your name? ");
 	fgets(name1, 29, stdin);
-	
 }
 
 int isWinner(char board[][3])
 {
 
 }
+
+

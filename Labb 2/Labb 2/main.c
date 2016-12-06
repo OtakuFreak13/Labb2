@@ -5,10 +5,12 @@
 int main()
 {
 	int turn = 1;
+	char playerOne[30];
+	name(&playerOne);
 
-	char playerOne = name1();
-
-	char playerTwo = name1();
+	char playerTwo[30];
+	name(&playerTwo);
+	
 	printf("%s \n%s", playerOne, playerTwo);
 	//if(turn = 1,3,5,7,9)
 	//{

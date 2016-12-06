@@ -15,7 +15,8 @@ void switcheroo(char *a, char *b);
 
 void chooseSpot(char player, char XO);
 
-void name();
+void name(char *name1);
+
 
 
 #endif // !FUNCTION_H

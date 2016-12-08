@@ -4,64 +4,72 @@
 
 int main()
 {
-	int spot = 0;
+	char spot = 0;
 	char playerOne[30];
 	name(&playerOne);
 
 	char playerTwo[30];
 	name(&playerTwo);
-	
+
 	printf("%s \n%s", playerOne, playerTwo);
 
 
 
 
-	printGame(board);
+	//printGame(board);
 
-	printf("%s", board);
-			if (board[0][0] == 1 || board[0][0] == 2 || board[0][0] == 3 || board[0][0] == 4 || board[0][0] == 5 || board[0][0] == 6 || board[0][0] == 7 || board[0][0] == 8 || board[0][0] == 9)
-			{
-				printf("nope\n");
-			}
-			if (board[1][0] == 1)
-			{
-				printf("yep\n");
-			}
+	//printf("%s", board);
+	//for (int i = 0; i < 3; i++)
+	//{
+	//	for (int j = 0; j < 3; j++)
+	//	{
+	//		if (board[i][j] == '1' || board[i][j] == '2' || board[i][j] == '3' || board[i][j] == '4' || board[i][j] == '5' || board[i][j] == '6' || board[i][j] == '7' || board[i][j] == '8' || board[i][j] == '9')
+	//		{
+	//			printf("yey\n");
+	//		}
+	//		if (board[2][2] == '9')
+	//		{
+	//			printf("yep\n");
+	//		}
+	//		if (board[i][j] != '1' && board[i][j] != '2' && board[i][j] != '3' && board[i][j] != '4' && board[i][j] != '5' && board[i][j] != '6' && board[i][j] != '7' && board[i][j] != '8' && board[i][j] != '9')
+	//		{
+	//			printf("\n");
+	//		}
+	//	}
+	//}
 
 
 
-
-	/*while (isWinner == 0)
+	while (isWinner(board) == 0)
 	{
 		printGame(board);
 		char XO = 'X';
-		chooseSpot(spot, playerOne, XO);
-		if (isWinner == 1)
+		chooseSpot(spot, board, playerOne, XO);
+		switcheroo(&board, &spot);
+		if (isWinner(board) == 1)
 		{
 			printf("Congratulations! %s you have won the game!", playerOne);
 		}
 
-		if (isWinner == 0)
+		if (isWinner(board) == 0)
 		{
 			printGame(board);
 			char XO = 'O';
-			chooseSpot(spot, playerTwo, XO);
-			if (isWinner == 1)
+			chooseSpot(spot, board, playerTwo, XO);
+			switcheroo(&board, &spot);
+			if (isWinner(board) == 1)
 			{
 				printf("Congratulations! %s you have won the game!", playerTwo);
 			}
 		}
 
-		if (isWinner == 0)
+		if (isWinner(board) == 0)
 		{
-			if (board[0][0] != 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9)
-			{
-
-			}
+			draw(board);
 		}
 
 	}
-*/
+
 
 
 

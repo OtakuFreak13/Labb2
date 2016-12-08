@@ -3,7 +3,7 @@
 
 void printGame(char board[][3])
 {
-	printf("|---|---|---|\n");
+	printf("\n|---|---|---|\n");
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -24,26 +24,70 @@ void printGame(char board[][3])
 	//printf("-------------\n");
 } 
 
-void chooseSpot(int spot, char player[], char XO)
+void chooseSpot(char spot,char board[][3], char player[], char XO)
 {
 	//printf("---->%s", &player);
 	//printf("---->%c", XO);
-	printf("%s choose which square you would like to put your %c. ", player, XO);
+	printf("%s choose in which square you would like to put your %c. ", player, XO);
 	scanf("%c", &spot);
-	while (spot == 'X' || spot == 'O' || 1>spot>9)
+	getchar();
+	while (spot == 'X' || spot == 'O')
+	{
+		printf("\n%s you have chosen a spot that's allready taken. \nPlease choose a valid square in which to put your %c. ", player, XO);
+		scanf("%c", &spot);
+		getchar();
+	}
+	
+
+
+	while (isPosPossible(spot, board) == 0)
 	{
 		printf("\n%s you have chosen a invalid spot. \nPlease choose a valid square in which to put your %c. ", player, XO);
 		scanf("%c", &spot);
+		getchar();
 	}
+	printf("Next players turn.");
 }
 
-void switcheroo(char *a, char *b)
+int isPosPossible(char pos, char board[][3]) 
 {
-	char temp = a;
-	*a = b;
-	*b = temp;
+
+	//int posToCheck = (int)pos;
+	int valid = 0;
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			if (pos == board[i][j])
+			{
+				valid = 1;
+			}
+		}
+	}
+	
+
+	return valid;
+
 
 }
+
+void switcheroo(char *board[][3], char *spot)
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			char temp = board[i][j];
+			*spot = board[i][j];
+			*board[i][j] = temp;
+		}
+	}
+
+}
+
+
+
 
 char board[3][3] = {
 	{ '1', '2', '3' },
@@ -63,9 +107,9 @@ int draw(char board[][3])
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if (board[i][j] != 1 )
+			if (board[i][j] != '1' && board[i][j] != '2' && board[i][j] != '3' && board[i][j] != '4' && board[i][j] != '5' && board[i][j] != '6' && board[i][j] != '7' && board[i][j] != '8' && board[i][j] != '9')
 			{
-
+				printf("The game is a draw!\n");
 			}
 		}
 	}
@@ -73,55 +117,32 @@ int draw(char board[][3])
 
 int isWinner(char board[][3])
 {
+	int returnValue = 0; 
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if (board[i][0] == board[i][1] == board[i][2])
+			if ((board[i][0] == board[i][1]) && (board[i][1] == board[i][2]))
 			{
-				//if (board[0][j] == board[1][j] == board[2][j] == 'X')
-				//{
-				//	printf("Congratulations! X has won the game!");
-				//}
-				//if(board[0][j] == board[1][j] == board[2][j] == 'O')
-				//{
-				//	printf("Congratulations! O has won the game!");
-				//}
-				return 1;
+				returnValue = 1;
 			}
-			if (board[0][j] == board[1][j] == board[2][j])
+			if ((board[0][j] == board[1][j]) && (board[1][j] == board[2][j]))
 			{
-				//if (board[0][j] == board[1][j] == board[2][j] == 'X')
-				//{
-				//	printf("Congratulations! X has won the game!");
-				//}
-				//if (board[0][j] == board[1][j] == board[2][j] == 'O')
-				//{
-				//	printf("Congratulations! O has won the game!");
-				//}
-				return 1;
-
+				returnValue = 1;
 			}
-			if ((board[0][0] == board[1][1] == board[2][2]) || (board[0][2] == board[1][1] == board[2][0]))
+			if (((board[0][0] == board[1][1]) && (board[1][1] == board[2][2])) || ((board[0][2] == board[1][1]) && (board[1][1] == board[2][0])))
 			{
-				//if (board[0][0] == board[1][1] == board[2][2] || board[0][2] == board[1][1] == board[2][0] == 'X')
-				//{
-				//	printf("Congratulations! X has won the game!");
-				//}
-				//if (board[0][0] == board[1][1] == board[2][2] || board[0][2] == board[1][1] == board[2][0] == 'O')
-				//{
-				//	printf("Congratulations! O has won the game!");
-				//}
-				return 1;
-
+				returnValue = 1;
 			}
 			else 
 			{
-				return 0;
+				returnValue = 0;
 			}
 		}
 
 	}
+
+	return returnValue;
 	
 	
 }

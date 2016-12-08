@@ -11,14 +11,15 @@ int isWinner(char board[][3]);
 
 char board[3][3];
 
-void switcheroo(char *a, char *b);
+void switcheroo(char *board, char *spot);
 
-void chooseSpot(int spot, char player[], char XO);
+void chooseSpot(char spot, char board[][3], char player[], char XO);
 
 void name(char *name1);
 
 int draw(char board[][3]);
 
+int isPosPossible(char pos, char board[][3]);
 
 
 #endif // !FUNCTION_H

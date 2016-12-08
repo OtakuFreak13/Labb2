@@ -13,46 +13,34 @@ void printGame(char board[][3])
 		}
 		printf("|\n|---|---|---|\n");
 	}
-
-	//printf("-------------\n");
-	//for (int i = 0; i < 3; i++)
-	//{
-	//	printf("| %c | %c | %c |\n", board[i][0], board[i][1], board[i][2]);
-	//	//if (i !=3-1)
-	//		printf("|---|---|---|\n");
-	//}
-	//printf("-------------\n");
 } 
 
-void chooseSpot(char spot,char board[][3], char player[], char XO)
+void chooseSpot(char *spot,char board[][3], char player[], char XO)
 {
-	//printf("---->%s", &player);
-	//printf("---->%c", XO);
+
 	printf("%s choose in which square you would like to put your %c. ", player, XO);
-	scanf("%c", &spot);
-	getchar();
-	while (spot == 'X' || spot == 'O')
+	*spot = getChar();
+
+	while (*spot == 'X' || *spot == 'O')
 	{
 		printf("\n%s you have chosen a spot that's allready taken. \nPlease choose a valid square in which to put your %c. ", player, XO);
-		scanf("%c", &spot);
-		getchar();
+		*spot = getChar();
 	}
 	
-
-
-	while (isPosPossible(spot, board) == 0)
+	while (isPosPossible(*spot, board) == 0 )
 	{
 		printf("\n%s you have chosen a invalid spot. \nPlease choose a valid square in which to put your %c. ", player, XO);
-		scanf("%c", &spot);
-		getchar();
+		*spot = getChar();
+		while (*spot == 'X' || *spot == 'O')
+		{
+			printf("\n%s you have chosen a spot that's allready taken. \nPlease choose a valid square in which to put your %c. ", player, XO);
+			*spot = getChar();
+		}
 	}
-	printf("Next players turn.");
 }
 
 int isPosPossible(char pos, char board[][3]) 
 {
-
-	//int posToCheck = (int)pos;
 	int valid = 0;
 
 	for (int i = 0; i < 3; i++)
@@ -65,25 +53,33 @@ int isPosPossible(char pos, char board[][3])
 			}
 		}
 	}
-	
-
 	return valid;
-
-
 }
 
-void switcheroo(char *board[][3], char *spot)
+char getChar()
+{
+	char c, d;
+	do
+	{
+		c = getchar();
+		if (c != '\n')
+			d = c;
+	} while (c != '\n');
+	return d;
+}
+
+void switcheroo(char board[][3], char *spot, char *XO)
 {
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			char temp = board[i][j];
-			*spot = board[i][j];
-			*board[i][j] = temp;
+			if (board[i][j] == *spot)
+			{
+				board[i][j] = *XO;
+			}
 		}
 	}
-
 }
 
 
@@ -99,19 +95,16 @@ void name (char *name1)
 {
 	printf("What is your name? ");
 	fgets(name1, 29, stdin);
+	name1[strlen(name1) - 1] = '\0';
 }
 
-int draw(char board[][3])
+void draw(char board[][3], int *finish)
 {
-	for (int i = 0; i < 3; i++)
+	int returnValue = 0;
+	if (board[0][0] != '1' && board[0][1] != '2' && board[0][2] != '3' && board[1][0] != '4' && board[1][1] != '5' && board[1][2] != '6' && board[2][0] != '7' && board[2][1] != '8' && board[2][2] != '9')
 	{
-		for (int j = 0; j < 3; j++)
-		{
-			if (board[i][j] != '1' && board[i][j] != '2' && board[i][j] != '3' && board[i][j] != '4' && board[i][j] != '5' && board[i][j] != '6' && board[i][j] != '7' && board[i][j] != '8' && board[i][j] != '9')
-			{
-				printf("The game is a draw!\n");
-			}
-		}
+		printf("The game is a draw!\n");
+		*finish = 1;
 	}
 }
 
@@ -134,17 +127,9 @@ int isWinner(char board[][3])
 			{
 				returnValue = 1;
 			}
-			else 
-			{
-				returnValue = 0;
-			}
 		}
-
 	}
-
 	return returnValue;
-	
-	
 }
 
 	

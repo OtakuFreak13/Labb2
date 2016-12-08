@@ -13,9 +13,11 @@ char board[3][3];
 
 void switcheroo(char *a, char *b);
 
-void chooseSpot(char player, char XO);
+void chooseSpot(int spot, char player[], char XO);
 
 void name(char *name1);
+
+int draw(char board[][3]);
 
 
 

@@ -9,8 +9,6 @@ void printGame(char board[][3]);
 
 int isWinner(char board[][3]);
 
-char board[3][3];
-
 void switcheroo(char board[][3], char *spot, char *XO);
 
 void chooseSpot(char *spot, char board[][3], char player[], char XO);

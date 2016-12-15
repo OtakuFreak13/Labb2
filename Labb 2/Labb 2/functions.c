@@ -85,12 +85,6 @@ void switcheroo(char board[][3], char *spot, char *XO)
 
 
 
-char board[3][3] = {
-	{ '1', '2', '3' },
-	{ '4', '5', '6' },
-	{ '7', '8', '9' }
-};
-
 void name (char *name1)
 {
 	printf("What is your name? ");
